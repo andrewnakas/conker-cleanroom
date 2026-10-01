@@ -74,13 +74,20 @@
   CONT.. keeps the retail letter shapes through its alpha outline).
 - More sign briefs: stone ROCK SOLID (454-456), LIGHTER FLUID, WARNING, Booze.
 
+## Update 2026-10-01 ~15:10 (menus)
+- Fourth publish done (188 drawn, taint 0). Then: the whole menu label set (ids 1977-2165: CONT.., EXIT, ERASE, PLAY,
+  RESTART, SET-UP, Y/N, chapter names BARN BOYS / BATS TOWER / SLOPRANO / UGA BUGA / SPOOKY / IT'S WAR / HEIST /
+  HUNGOVER / WINDY, multiplayer words, GAME 1-3) is re-typeset as spans over their 32x32 RGBA32 tiles
+  (stored top-down: `"flip": false`). 18 blank-looking tiles there were mis-guessed CI8: fixed in `layout_overrides.json`.
+  Checked on a clean sheet only; a text is split evenly over its tiles, which assumes the game draws them side by side.
+- Not identified: 2136-2138 (a green team name), 2080/2081, 2020-2022, 1985/1987, OPTIONS dim (2001/2002), "PAUSED".
+
 ## Open problems
 - Title logo (ids 2415-2440, RGBA32 32x32 tiles mapped on a model) and the splash/legal screens (2530-2608) are
   still blurred: the tile arrangement is not a simple grid.
 - Whole-face textures (Berri 815-817, grey squirrel 965-969/1757-1758, frogs 3690-3695, sunflower 4305-4307,
   two-eye strips, Conker close-ups 7705/7706) now have hand-written briefs (approximate positions; checked on a
   clean sheet only, not in-game).
-- Menu chapter-name letter tiles (ids ~1977-2165) not re-typeset yet (which tile holds which letters is unclear).
 - In-game checks so far cover boot, menus and the intro only; signs are checked on contact sheets, audio is not
   listened to (only: no hang).
 - Game code cannot be recompressed (black screen), so no code patches.

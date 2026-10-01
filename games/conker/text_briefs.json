@@ -483,7 +483,12 @@
 ]
 },
 "2141": {
-"t": "CLEAN|ROOM",
+"t": "CLEAN ROOM",
+"span": [
+2141,
+2142,
+2143
+],
 "flip": false,
 "font": "rubik"
 },
@@ -1135,6 +1140,1200 @@
 30,
 40,
 170
+]
+},
+"2003": {
+"t": "CONT..",
+"span": [
+2003,
+2004
+],
+"fg": [
+45,
+120,
+35
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2005": {
+"t": "CONT..",
+"span": [
+2005,
+2006
+],
+"fg": [
+130,
+255,
+70
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2007": {
+"t": "ERASE",
+"span": [
+2007,
+2008
+],
+"fg": [
+45,
+120,
+35
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2009": {
+"t": "ERASE",
+"span": [
+2009,
+2010
+],
+"fg": [
+130,
+255,
+70
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2041": {
+"t": "PLAY",
+"span": [
+2041,
+2042
+],
+"fg": [
+45,
+120,
+35
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2044": {
+"t": "EXIT",
+"span": [
+2044,
+2045
+],
+"fg": [
+45,
+120,
+35
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2046": {
+"t": "EXIT",
+"span": [
+2046,
+2047
+],
+"fg": [
+130,
+255,
+70
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2048": {
+"t": "RACE A",
+"span": [
+2048,
+2049
+],
+"fg": [
+45,
+120,
+35
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2050": {
+"t": "RACE A",
+"span": [
+2050,
+2051
+],
+"fg": [
+130,
+255,
+70
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2052": {
+"t": "RACE B",
+"span": [
+2052,
+2053
+],
+"fg": [
+45,
+120,
+35
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2054": {
+"t": "RACE B",
+"span": [
+2054,
+2055
+],
+"fg": [
+130,
+255,
+70
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2062": {
+"t": "RESTART",
+"span": [
+2062,
+2063
+],
+"fg": [
+45,
+120,
+35
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2064": {
+"t": "RESTART",
+"span": [
+2064,
+2065
+],
+"fg": [
+130,
+255,
+70
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2066": {
+"t": "SET-UP",
+"span": [
+2066,
+2067
+],
+"fg": [
+45,
+120,
+35
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2068": {
+"t": "SET-UP",
+"span": [
+2068,
+2069
+],
+"fg": [
+130,
+255,
+70
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2076": {
+"t": "TEMPLE",
+"span": [
+2076,
+2077
+],
+"fg": [
+45,
+120,
+35
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2078": {
+"t": "TEMPLE",
+"span": [
+2078,
+2079
+],
+"fg": [
+130,
+255,
+70
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2085": {
+"t": "THE VAULT",
+"span": [
+2085,
+2086
+],
+"fg": [
+45,
+120,
+35
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2087": {
+"t": "THE VAULT",
+"span": [
+2087,
+2088
+],
+"fg": [
+130,
+255,
+70
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2095": {
+"t": "Y",
+"span": [
+2095
+],
+"fg": [
+45,
+120,
+35
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2096": {
+"t": "Y",
+"span": [
+2096
+],
+"fg": [
+130,
+255,
+70
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2033": {
+"t": "N",
+"span": [
+2033
+],
+"fg": [
+45,
+120,
+35
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2034": {
+"t": "N",
+"span": [
+2034
+],
+"fg": [
+130,
+255,
+70
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"1990": {
+"t": "BUNKERS",
+"span": [
+1990,
+1991
+],
+"fg": [
+45,
+120,
+35
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"1992": {
+"t": "BUNKERS",
+"span": [
+1992,
+1993
+],
+"fg": [
+130,
+255,
+70
+],
+"stroke": [
+10,
+35,
+10
+],
+"flip": false,
+"cut": true,
+"font": "lilita"
+},
+"2056": {
+"t": "RACE",
+"span": [
+2056,
+2057,
+2058
+],
+"fg": [
+255,
+90,
+20
+],
+"stroke": [
+90,
+20,
+0
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2059": {
+"t": "RAPTOR",
+"span": [
+2059,
+2060,
+2061
+],
+"fg": [
+150,
+150,
+40
+],
+"stroke": [
+40,
+40,
+0
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2070": {
+"t": "STATS",
+"span": [
+2070,
+2071
+],
+"fg": [
+150,
+90,
+200
+],
+"stroke": [
+30,
+10,
+50
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2082": {
+"t": "WAR",
+"span": [
+2082,
+2083,
+2084
+],
+"fg": [
+60,
+130,
+40
+],
+"stroke": [
+10,
+30,
+10
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2089": {
+"t": "WAR",
+"span": [
+2089,
+2090,
+2091
+],
+"fg": [
+70,
+150,
+50
+],
+"stroke": [
+230,
+230,
+230
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2092": {
+"t": "WINDY",
+"span": [
+2092,
+2093,
+2094
+],
+"fg": [
+200,
+230,
+40
+],
+"stroke": [
+60,
+70,
+0
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2097": {
+"t": "BACK",
+"span": [
+2097,
+2098
+],
+"fg": [
+30,
+30,
+30
+],
+"stroke": [
+235,
+235,
+235
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2099": {
+"t": "BARN BOYS",
+"span": [
+2099,
+2100,
+2101
+],
+"fg": [
+255,
+170,
+30
+],
+"stroke": [
+80,
+30,
+0
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2102": {
+"t": "BATS TOWER",
+"span": [
+2102,
+2103,
+2104
+],
+"fg": [
+230,
+50,
+20
+],
+"stroke": [
+60,
+10,
+0
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2105": {
+"t": "HEIST",
+"span": [
+2105,
+2106,
+2107
+],
+"fg": [
+255,
+150,
+30
+],
+"stroke": [
+80,
+30,
+0
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2108": {
+"t": "HUNGOVER",
+"span": [
+2108,
+2109,
+2110
+],
+"fg": [
+220,
+40,
+150
+],
+"stroke": [
+50,
+0,
+40
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2111": {
+"t": "IT'S WAR",
+"span": [
+2111,
+2112,
+2113
+],
+"fg": [
+130,
+150,
+110
+],
+"stroke": [
+20,
+30,
+20
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2117": {
+"t": "SLOPRANO",
+"span": [
+2117,
+2118,
+2119
+],
+"fg": [
+230,
+170,
+40
+],
+"stroke": [
+60,
+30,
+0
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2120": {
+"t": "SPOOKY",
+"span": [
+2120,
+2121,
+2122
+],
+"fg": [
+150,
+150,
+150
+],
+"stroke": [
+20,
+20,
+20
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2123": {
+"t": "UGA BUGA",
+"span": [
+2123,
+2124,
+2125
+],
+"fg": [
+240,
+80,
+30
+],
+"stroke": [
+60,
+10,
+0
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2126": {
+"t": "WINDY",
+"span": [
+2126,
+2127,
+2128
+],
+"fg": [
+150,
+160,
+50
+],
+"stroke": [
+30,
+30,
+0
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2129": {
+"t": "BLUES",
+"span": [
+2129,
+2130
+],
+"fg": [
+60,
+70,
+220
+],
+"stroke": [
+230,
+230,
+230
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2131": {
+"t": "DRAW",
+"span": [
+2131,
+2132
+],
+"fg": [
+40,
+40,
+40
+],
+"stroke": [
+230,
+230,
+230
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2133": {
+"t": "FRENCHIES",
+"span": [
+2133,
+2134,
+2135
+],
+"fg": [
+60,
+50,
+70
+],
+"stroke": [
+230,
+230,
+230
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2139": {
+"t": "LOSE",
+"span": [
+2139,
+2140
+],
+"fg": [
+40,
+40,
+40
+],
+"stroke": [
+230,
+230,
+230
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2144": {
+"t": "RAPTORS",
+"span": [
+2144,
+2145,
+2146
+],
+"fg": [
+60,
+50,
+70
+],
+"stroke": [
+230,
+230,
+230
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2147": {
+"t": "REDS",
+"span": [
+2147,
+2148
+],
+"fg": [
+200,
+40,
+30
+],
+"stroke": [
+230,
+230,
+230
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2150": {
+"t": "SQUIRRELS",
+"span": [
+2150,
+2151,
+2152
+],
+"fg": [
+60,
+50,
+70
+],
+"stroke": [
+230,
+230,
+230
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2153": {
+"t": "TEDIZ",
+"span": [
+2153,
+2154
+],
+"fg": [
+60,
+50,
+70
+],
+"stroke": [
+230,
+230,
+230
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2155": {
+"t": "UGAS",
+"span": [
+2155,
+2156
+],
+"fg": [
+60,
+50,
+70
+],
+"stroke": [
+230,
+230,
+230
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2157": {
+"t": "WIN",
+"span": [
+2157,
+2158
+],
+"fg": [
+60,
+50,
+70
+],
+"stroke": [
+230,
+230,
+230
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2159": {
+"t": "YELLOWS",
+"span": [
+2159,
+2160,
+2161
+],
+"fg": [
+230,
+200,
+30
+],
+"stroke": [
+60,
+50,
+0
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2162": {
+"t": "YOU",
+"span": [
+2162,
+2163
+],
+"fg": [
+60,
+50,
+70
+],
+"stroke": [
+230,
+230,
+230
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"1977": {
+"t": "BEACH",
+"span": [
+1977,
+1978,
+1979
+],
+"fg": [
+250,
+210,
+40
+],
+"stroke": [
+80,
+50,
+0
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2011": {
+"t": "GAME 1",
+"span": [
+2011,
+2012,
+2013
+],
+"fg": [
+230,
+40,
+30
+],
+"stroke": [
+60,
+0,
+0
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2014": {
+"t": "GAME 2",
+"span": [
+2014,
+2015,
+2016
+],
+"fg": [
+60,
+220,
+50
+],
+"stroke": [
+0,
+50,
+0
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2017": {
+"t": "GAME 3",
+"span": [
+2017,
+2018,
+2019
+],
+"fg": [
+40,
+70,
+240
+],
+"stroke": [
+0,
+0,
+60
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"1994": {
+"t": "CHEERS",
+"span": [
+1994,
+1995,
+1996
+],
+"fg": [
+60,
+170,
+250
+],
+"stroke": [
+0,
+30,
+70
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2149": {
+"t": "SCORE",
+"fg": [
+230,
+230,
+230
+],
+"flip": false,
+"cut": true,
+"stroke": [
+20,
+20,
+20
 ]
 }
 }
