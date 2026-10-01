@@ -149,6 +149,21 @@ def main(argv):
         rom.set_bank(audio.BANK, 1, ext)
         rom.set_bank(audio.BANK, 2, tbl)
         print("audio: wave table resynthesised")
+    if not only or "voices" in only:
+        from . import voices
+        done = voices.encode()
+        ents = rom.banks[voices.BANK][1]
+        fill = 0
+        for i, e in enumerate(ents):
+            if not e.data:
+                continue
+            if i in done:
+                rom.set_bank(voices.BANK, i, done[i])
+            else:
+                h = int.from_bytes(e.data[:4], "big")
+                rom.set_bank(voices.BANK, i, voices.filler(len(e.data), voices.BR2[(h >> 12) & 15] or 24, i))
+                fill += 1
+        print(f"voices: {len(done)} placeholder streams, {fill} silent fillers")
     data = rom.build()
     open(argv[2], "wb").write(data)
     import hashlib

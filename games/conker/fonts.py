@@ -102,7 +102,7 @@ def spec(rom_path, out):
         glyphs.append([w, h, rom[o + 2:o + 4].hex()])
         o += int.from_bytes(rom[o + 4:o + 8], "big")
     chars = bytes(r.gdata[MAP_OFF:MAP_OFF + COUNT]).decode("latin-1")
-    json.dump(dict(glyphs=glyphs, chars=chars), open(out, "w", encoding="utf-8"), ensure_ascii=False)
+    json.dump(dict(glyphs=glyphs, chars=chars, used=o - START), open(out, "w", encoding="utf-8"), ensure_ascii=False)
     print(f"font: {len(glyphs)} glyph metrics -> {out}")
 
 
@@ -120,15 +120,30 @@ def rle(w, h, px):
 
 
 def build(spec_dir):
-    """Clean font table bytes (fixed size END - START)."""
+    """Clean font table bytes (fixed size END - START). The records fill exactly the retail span (`used`):
+    the game walks the table to its end, so a shorter table leaves it reading zero-size records (black boot).
+    Runs are split (legal, one extra byte each) until the size matches."""
     d = json.load(open(os.path.join(spec_dir, "font.json"), encoding="utf-8"))
-    out = b""
+    encs = []
     for i, (w, h, meta) in enumerate(d["glyphs"]):
         m = draw(i, d["chars"][i], w, h)
         px = (np.clip(np.round(m * 15), 0, 15).astype(np.uint8) << 4).ravel().tobytes()
-        enc = rle(w, h, px)
-        out += bytes((w, h)) + bytes.fromhex(meta) + (8 + len(enc)).to_bytes(4, "big") + enc
-    assert len(out) <= END - START, f"font table {len(out) - (END - START)} bytes too large"
+        encs.append(bytearray(rle(w, h, px)))
+    deficit = d["used"] - sum(8 + len(e) for e in encs)
+    assert deficit >= 0, f"font table {-deficit} bytes too large"
+    k = 0
+    while deficit:
+        e = encs[k % len(encs)]
+        j = next((j for j in range(len(e)) if e[j] & 0x0F), None)
+        if j is not None:
+            v, run = e[j] & 0xF0, (e[j] & 0x0F) + 1
+            e[j:j + 1] = bytes((v | (run - 2), v))
+            deficit -= 1
+        k += 1
+    out = b""
+    for (w, h, meta), e in zip(d["glyphs"], encs):
+        out += bytes((w, h)) + bytes.fromhex(meta) + (8 + len(e)).to_bytes(4, "big") + bytes(e)
+    assert len(out) == d["used"]
     return out + bytes(END - START - len(out))
 
 

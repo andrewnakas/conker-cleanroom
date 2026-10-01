@@ -20,7 +20,26 @@ BANK = 0x16
 BR2 = [0, 8, 16, 24, 32, 40, 48, 56, 64, 80, 96, 112, 128, 144, 160]
 
 
+def plain_mp3(data):
+    """Standard MP3 from a Conker stream: drop the 9-byte `L:` cue record that follows every frame whose
+    copyright bit is set (lip-sync cues; standard decoders lose sync on them) and the trailing bytes."""
+    out = bytearray()
+    o = 0
+    while o + 4 <= len(data):
+        h = struct.unpack_from(">I", data, o)[0]
+        if h >> 21 != 0x7FF or not BR2[(h >> 12) & 15]:
+            break
+        flen = 72 * BR2[(h >> 12) & 15] * 1000 // 22050 + ((h >> 9) & 1)
+        out += data[o:o + 3] + bytes([data[o + 3] & 0xF7]) + data[o + 4:o + flen]
+        o += flen
+        if h & 0x08:
+            end = data.find(bytes(1), o, o + 256)
+            o = end + 1 if end >= 0 else o
+    return bytes(out)
+
+
 def load(data):
+    data = plain_mp3(data)
     ct = av.open(io.BytesIO(data), format="mp3")
     s = ct.streams.audio[0]
     rate = s.rate

@@ -33,7 +33,23 @@ DEFAULT = ("mid", "en_US-ryan-high", 1.5)
 
 
 def lines():
-    return json.load(open(os.path.join(SPEC, "voices.json")))
+    p = os.path.join(SPEC, "voices.json")
+    if os.path.exists(p):
+        return json.load(open(p))
+    out = {}                                  # transcription still running: use what is done
+    part = os.path.join(SPEC, "voices.partial.jsonl")
+    if os.path.exists(part):
+        for ln in open(part):
+            k, v = json.loads(ln)
+            out[str(k)] = v
+    return out
+
+
+def filler(nbytes, kbps, key):
+    """A stream with no transcript yet: faint seeded noise of the same length."""
+    n = int(nbytes * 8 / (kbps * 1000) * HZ)
+    x = np.random.default_rng(key * 7919 + 17).normal(0, 0.0012, n).astype(np.float32)
+    return with_cues(mp3_bytes(x, kbps), key, nbytes)
 
 
 def band(f0):
@@ -136,18 +152,37 @@ def mp3_bytes(x, kbps):
 BR2 = [0, 8, 16, 24, 32, 40, 48, 56, 64, 80, 96, 112, 128, 144, 160]
 
 
-def whole_frames(b, limit):
-    """Keep whole MPEG-2 Layer III frames while the stream stays within `limit` bytes."""
-    o = 0
+_CUES = None
+
+
+def with_cues(b, key, limit):
+    """Final stream for bank entry `key`: whole MPEG-2 Layer III frames of `b`, with the game's lip-sync cue
+    records (kept facts: frame index + 6 bytes, spec/voice_cues.json) re-attached. A cue is `L:` + 6 bytes + NUL
+    after a frame whose copyright bit is set. The result stays within `limit` bytes."""
+    global _CUES
+    if _CUES is None:
+        _CUES = json.load(open(os.path.join(SPEC, "voice_cues.json")))
+    cues = dict(_CUES.get(str(key), {}).get("cues", []))
+    out = bytearray()
+    o = k = 0
     while o + 4 <= len(b):
         h = int.from_bytes(b[o:o + 4], "big")
         if h >> 21 != 0x7FF:
             break
         flen = 72 * BR2[(h >> 12) & 15] * 1000 // HZ + ((h >> 9) & 1)
-        if flen <= 0 or o + flen > min(limit, len(b)):
+        if flen <= 4 or o + flen > len(b):
             break
+        frame = bytearray(b[o:o + flen])
+        cue = cues.get(k)
+        frame[3] = (frame[3] | 0x08) if cue else (frame[3] & 0xF7)
+        if cue:
+            frame += b"L:" + bytes.fromhex(cue) + bytes(1)
+        if len(out) + len(frame) > limit:
+            break
+        out += frame
         o += flen
-    return b[:o]
+        k += 1
+    return bytes(out)
 
 
 def build(cache=CACHE, only=None):
@@ -172,7 +207,7 @@ def encode(cache=CACHE):
         if not os.path.exists(p):
             continue
         b = mp3_bytes(wav_read(p), d["kbps"] or 24)
-        out[int(key)] = whole_frames(b, d["bytes"])
+        out[int(key)] = with_cues(b, int(key), d["bytes"])
     return out
 
 

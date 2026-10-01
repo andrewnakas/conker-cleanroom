@@ -15,6 +15,29 @@
     byte for byte. Recompressed banks + game data boot fine; an unknown MD5 also boots.
   - **Do not recompress game code chunks**: that ROM stays black (probably an integrity check). Code is never changed.
 
+## Works (2026-10-01 midday)
+- `python -m games.conker.generate <retail> <clean.z64>` builds the clean ROM; it boots in headless Edge (EmulatorJS) to the
+  save-select menu with every flat texture regenerated.
+- Textures: `texscan.py` (display-list usages) + `texspec.py` -> `spec/textures.json` for all 7760 flat ids
+  (format, mip layout, 4x4 grid, 2-bit alpha). Layout evidence: 1751 from display-list tiles, 1429 from palette mode /
+  loaded size, 2855 background-view tiles (64x32, proven by the decomp), 1720 guessed from size class + image statistics.
+  Generator: grid + alpha outline + own median-cut palette (CI8 limited to 64 colours, grain 1.5) so the flat stream
+  fits its fixed span (9.07 of 9.49 MB).
+- Bank 00 sprites (56 sets, 270 frames: RGBA16 + I4 plane, frame size found by statistics): regenerated.
+- Sound bank (bank 17): 2258 samples / 29 min resynthesised from outlines, own 4-predictor books, loop states from our data;
+  sizes unchanged. Cache: `D:/n64work/conker/work/audio_cache.pkl`.
+- Taint (`python -m games.conker.taint <retail> <clean>`): textures, sprites, font, ADPCM, books, loops = 0 failing.
+  Decoded-RGBA rule is 32 texels (not 32 bytes): 8-texel runs of similar 5-bit browns recur by chance in 16 MB of pixels.
+- Other banks checked: 05 = Huffman-coded per-scene structure data (not pixels), 06/08/13/1A/1C nested text/data,
+  02/0F animation, 0B/0C/0E placements, 14 scripts: all kept (geometry / text / code-like).
+
+## Open problems
+- **System font (RLE table at ROM 0x40F10)**: the redrawn table makes the boot go black. Under test: checksum over the
+  boot segment vs. my table being shorter than retail (walk past the end).
+- Speech (bank 16, 453 MP3 streams, ~2 h): Whisper small.en on CPU is transcribing (GPU has no CUDA libs);
+  then Piper placeholders (`voices.py`), encode, taint.
+- Game code cannot be recompressed (black screen), so no code patches for now.
+
 ## Next
 - Texture census: format/size per flat id from display-list references, then grid+alpha regeneration.
 - Fonts (RLE table 0x40F10), audio banks (bank 17), MP3 speech (bank 16, 453 streams), other banks census.

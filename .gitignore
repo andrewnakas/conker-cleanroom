@@ -5,3 +5,5 @@ __pycache__/
 *.v64
 *.zip
 baserom*
+voices.partial.jsonl
+games/conker/takes/
