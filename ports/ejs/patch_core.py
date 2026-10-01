@@ -1,4 +1,4 @@
-"""Give our ROM the emulator's Banjo-Kazooie settings (EEPROM 4 KB save type etc.).
+"""Give our ROM the emulator's Conker's Bad Fur Day settings (EEPROM 16 KB save type etc.).
 
 mupen64plus looks ROMs up by MD5 in a database compiled into the core; an unknown
 ROM gets no EEPROM and the game may stall. The database has a hack entry whose
@@ -14,7 +14,7 @@ import sys
 
 import py7zr
 
-SLOT = b"[8E870036E7A40BA42803C333A412EFE7]"      # "Banjo-Kazooie (U) (V1.0) [b1]", RefMD5 = US v1.0 (EEPROM 4 KB)
+SLOT = b"[256564DAF29311497917BAAA14ED3F6D]"      # "Conker's Bad Fur Day (U) [T+Fre1.3_Corrigo]", RefMD5 = US (EEPROM 16 KB, rumble)
 CORES = ["mupen64plus_next-wasm.data", "mupen64plus_next-legacy-wasm.data"]
 
 
@@ -44,7 +44,7 @@ def main(argv):
     for c in CORES:
         if os.path.exists(os.path.join(cin, c)):
             patch(os.path.join(cin, c), os.path.join(cout, c), md5)
-    print(f"patch_core: BK settings entry -> md5 {md5}")
+    print(f"patch_core: CBFD settings entry -> md5 {md5}")
 
 
 if __name__ == "__main__":

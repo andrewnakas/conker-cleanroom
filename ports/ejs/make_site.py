@@ -9,7 +9,7 @@ import os
 import shutil
 import sys
 
-RETAIL_SHA1 = ("ded6ee166e740ad1bc810fd678a84b48e245ab80", "1fe1632098865f639e22c11b9a81ee8f29c75d7a")
+RETAIL_SHA1 = ("4cbadd3c4e0729dec46af64ad018050eada4f47a",)
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 NOTICE = """# Third-party runtime in this site
@@ -17,8 +17,8 @@ NOTICE = """# Third-party runtime in this site
 - EmulatorJS 4.2.3 (`data/`), GPL-3.0: https://github.com/EmulatorJS/EmulatorJS (license: `data/LICENSE.EmulatorJS`)
 - libretro mupen64plus-next core (`data/cores/mupen64plus_next-*.data`), GPL-2.0:
   source https://github.com/libretro/mupen64plus-libretro-nx (built by the EmulatorJS project)
-- `bk.z64` is built from the n64decomp/banjo-kazooie decompilation with every ROM-extracted asset regenerated
-  (see https://github.com/andrewnakas/bk-cleanroom).
+- `conker.z64` is the game program with every art and sound asset regenerated from coarse facts (container layout from the DevOldSchool/conkers-bfd-decomp documentation)
+  (see https://github.com/andrewnakas/conker-cleanroom).
 """
 
 
@@ -37,7 +37,7 @@ def main(argv):
     shutil.copytree(os.path.join(ejs, "data"), os.path.join(site, "data"), dirs_exist_ok=True)
     shutil.copyfile(os.path.join(ejs, "LICENSE"), os.path.join(site, "data", "LICENSE.EmulatorJS"))
     shutil.copyfile(os.path.join(HERE, "index.html"), os.path.join(site, "index.html"))
-    open(os.path.join(site, "bk.z64"), "wb").write(data)
+    open(os.path.join(site, "conker.z64"), "wb").write(data)
     open(os.path.join(site, "THIRD_PARTY.md"), "w").write(NOTICE)
     open(os.path.join(site, ".nojekyll"), "w").close()
     total = sum(os.path.getsize(os.path.join(d, f)) for d, _, fs in os.walk(site) for f in fs)

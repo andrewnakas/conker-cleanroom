@@ -70,7 +70,7 @@ def main():
     p = subprocess.Popen(args + ["about:blank"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     console, shots = [], 0
     try:
-        for _ in range(80):
+        for _ in range(480):
             try:
                 tabs = json.load(urllib.request.urlopen(f"http://127.0.0.1:{a.port}/json"))
                 break

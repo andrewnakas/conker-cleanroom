@@ -47,6 +47,7 @@ def shrink(img, w, h):
     return img[:h * fy, :w * fx].reshape(h, fy, w, fx, 4).mean((1, 3))
 
 
+GRAIN = float(os.environ.get("CONKER_GRAIN", 1.5))
 CI8_COLOURS = 64     # fewer distinct indices keep the flat stream inside its fixed ROM span
 
 
@@ -92,6 +93,10 @@ def build_texture(i, d, level0=None):
     lay = d
     img = np.asarray(level0, np.float32) if level0 is not None else base_image(i, d)
     levels = [img] + [shrink(img, w, h) for _, _, w, h in d["levels"][1:]]
+    # seeded grain: breaks up flat runs (banding, and chance byte runs shared with any other image)
+    rng = np.random.default_rng(cgen.h32("grain", i))
+    levels = [np.concatenate([l[..., :3] + rng.uniform(-GRAIN, GRAIN, l.shape[:2] + (1,)),
+                              l[..., 3:]], -1) for l in levels]
     out = bytearray(d["size"])
     if d["fmt"] == texfmt.CI:
         idx, palb = quantise(levels, d["pal"] // 2, cgen.h32("pal", i), CI8_COLOURS)
@@ -132,6 +137,18 @@ def main(argv):
         from . import fonts
         rom.fonts = fonts.build(SPEC)
         print("font: 95 glyphs redrawn")
+    if not only or "sprites" in only:
+        from . import sprites
+        for i, b in sprites.build(SPEC).items():
+            rom.set_bank(sprites.BANK, i, b)
+        print("sprites: bank 00 regenerated")
+    if (not only or "audio" in only) and os.path.exists(os.path.join(SPEC, "samples.json")):
+        from . import audio
+        ents = rom.banks[audio.BANK][1]
+        ext, tbl = audio.build(ents[1].data, SPEC, cache=os.environ.get("CONKER_AUDIO_CACHE", "D:/n64work/conker/work/audio_cache.pkl"))
+        rom.set_bank(audio.BANK, 1, ext)
+        rom.set_bank(audio.BANK, 2, tbl)
+        print("audio: wave table resynthesised")
     data = rom.build()
     open(argv[2], "wb").write(data)
     import hashlib
