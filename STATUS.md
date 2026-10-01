@@ -66,6 +66,14 @@
   nothing past the intro has been checked in-game yet. Re-run `python -m games.conker.look clean.z64 "<script>"`
   (dev server: `python ports/wasm/serve.py D:/n64work/conker/devsite 8137`) when the machine is idle.
 
+## Update 2026-10-01 ~14:40
+- **Gameplay verified** in headless Edge on the clean ROM: after the (unskippable; Start only pauses) intro, Conker is
+  controllable in the first area (field, fence, scarecrow, signpost) and walks with the stick keys. About 10 min
+  from boot to control: script `"50:Enter:0.3,80:Enter:0.3,90:x:0.3,100:x:0.3,...600:shot,605:ArrowUp:6,..."`.
+- Pause menu lettering (PAUSED, EXIT, CONT.., Y/N) is not re-typeset: ids not found yet (EXIT shows a grey block,
+  CONT.. keeps the retail letter shapes through its alpha outline).
+- More sign briefs: stone ROCK SOLID (454-456), LIGHTER FLUID, WARNING, Booze.
+
 ## Open problems
 - Title logo (ids 2415-2440, RGBA32 32x32 tiles mapped on a model) and the splash/legal screens (2530-2608) are
   still blurred: the tile arrangement is not a simple grid.
