@@ -82,6 +82,12 @@
   Checked on a clean sheet only; a text is split evenly over its tiles, which assumes the game draws them side by side.
 - Not identified: 2136-2138 (a green team name), 2080/2081, 2020-2022, 1985/1987, OPTIONS dim (2001/2002), "PAUSED".
 
+## Update 2026-10-01 ~15:20 (fifth publish, loop stopped)
+- Published with the menu labels; taint 0 failing. In-game: "GAME 1", "NEW GAME", pause "EXIT" / "CONT.." read
+  cleanly and their tiles join correctly. "PAUSED" (3D letters with a blurred texture) is still unreadable.
+- Loop stopped here: what is left needs either the tile arrangement of the title logo / splash screens
+  (ids 2415-2440, 2530-2608) or play-testing deeper than the first area. Restart with /loop to continue.
+
 ## Open problems
 - Title logo (ids 2415-2440, RGBA32 32x32 tiles mapped on a model) and the splash/legal screens (2530-2608) are
   still blurred: the tile arrangement is not a simple grid.
