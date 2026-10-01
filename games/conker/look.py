@@ -1,6 +1,6 @@
 """Dev: boot a ROM from the dev site in headless Edge and write one contact sheet.
 
-    python -m games.conker.look <rom name in devsite> [script] [--port 8131]
+    python -m games.conker.look <rom name in devsite> [script] [--port 8137]
 
 script is cdp_shot's ("15:shot,40:shot,45:Enter:0.3,70:shot"). Prints the sheet path.
 """
@@ -18,7 +18,7 @@ def main(argv):
     script = argv[2] if len(argv) > 2 and not argv[2].startswith("--") else "15:shot,40:shot,45:Enter:0.3,70:shot"
     out = f"{DEV}/shots/{os.path.splitext(rom)[0]}"
     r = subprocess.run([sys.executable, "ports/ejs/cdp_shot.py", out, "--url",
-                        f"http://localhost:8131/index.html?rom={rom}&hb=1", "--script", script, "--gpu", "--port", "9351"],
+                        f"http://localhost:8137/index.html?rom={rom}&hb=1", "--script", script, "--gpu", "--port", "9351"],
                        capture_output=True, text=True)
     print((r.stdout + r.stderr).strip().splitlines()[-1])
     shots = sorted((f for f in os.listdir(out) if f.startswith("shot_")), key=lambda f: float(f[5:-4]))

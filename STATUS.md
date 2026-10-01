@@ -50,11 +50,26 @@
 - Text on a cut-out keeps the retail lettering in its alpha outline: `drawn.draw_text` always redraws alpha there.
 - Headless Edge can take > 20 s to start under load (`cdp_shot.py` waits up to 2 min now).
 
+## Update 2026-10-01 ~13:15 (second publish)
+- All 453 speech streams transcribed (`spec/voices.json`, Whisper small.en on CPU) and replaced by Piper placeholders
+  with the lip-sync cues re-attached; no fillers left. Taint still **0 failing of 21,565**; Pages "built".
+- Re-typeset text (`text_briefs.json`, ~90 textures): signs, posters, gravestones, labels, A-Z name-entry blocks,
+  newspapers, NEW GAME / OPTIONS / PLAY. Eyes (`face_briefs.json`, 54 textures) drawn from coarse briefs
+  (`eyefit.py`): Conker's eyes verified in-game (blue iris, pupil, highlight).
+- Conker's face frames 1934-1945 are fur with a cut-out eye hole (kept alpha), so they need no brief.
+- Dev server port is 8137 now (another session took 8131: its page answered "problem loading rom").
+
 ## Open problems
-- Speech: Whisper small.en on CPU is still transcribing (GPU has no CUDA libs). Streams without a transcript are
-  faint-noise fillers for now; rerun `python -m games.conker.voices build` + `publish.sh` when `spec/voices.json` exists.
+- Title logo (ids 2415-2440, RGBA32 32x32 tiles mapped on a model) and the splash/legal screens (2530-2608) are
+  still blurred: the tile arrangement is not a simple grid.
+- Faces that are whole painted textures (Berri 815-817, grey squirrel 965-969/1757-1758, frogs 3690-3695,
+  sunflower 4305-4307, two-eye strips 1286-1288/2401/3490-3492) are still colour grids: the automatic eye fit was
+  poor there and its briefs were removed. They need hand-written briefs.
+- Menu chapter-name letter tiles (ids ~1977-2165) not re-typeset yet (which tile holds which letters is unclear).
+- In-game checks so far cover boot, menus and the intro only; signs are checked on contact sheets, audio is not
+  listened to (only: no hang).
 - Game code cannot be recompressed (black screen), so no code patches.
-- Layout of 1720 textures is a guess from statistics; a few may have the wrong width (they show as noise in-game).
+- Machine ran out of RAM around noon; heavy jobs are run one at a time.
 
 ## Next
 - Eyes: lids and two-eye textures in `eyefit.py`; Conker's own face frames (64x32 CI4, dynamic segments).
