@@ -59,6 +59,13 @@
 - Conker's face frames 1934-1945 are fur with a cut-out eye hole (kept alpha), so they need no brief.
 - Dev server port is 8137 now (another session took 8131: its page answered "problem loading rom").
 
+## Update 2026-10-01 ~13:45 (third publish)
+- 182 textures drawn (text briefs + eye/face briefs incl. hand-written whole faces); taint 0 failing; pushed.
+- In-game: tavern patrons' and Conker's eyes are drawn correctly (boot, Rareware scene, save select).
+- Headless emulation is very slow while other sessions build (6.5 min of wall time = still in the logo scene), so
+  nothing past the intro has been checked in-game yet. Re-run `python -m games.conker.look clean.z64 "<script>"`
+  (dev server: `python ports/wasm/serve.py D:/n64work/conker/devsite 8137`) when the machine is idle.
+
 ## Open problems
 - Title logo (ids 2415-2440, RGBA32 32x32 tiles mapped on a model) and the splash/legal screens (2530-2608) are
   still blurred: the tile arrangement is not a simple grid.
