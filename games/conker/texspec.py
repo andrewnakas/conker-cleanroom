@@ -92,7 +92,10 @@ TILE_VIEW = {1056: (2, 0, 32), 2560: (2, 1, 512)}
 ALL_KINDS = [(2, 1, 512), (2, 0, 32), (0, 2, 0), (0, 3, 0), (3, 1, 0), (4, 1, 0), (4, 0, 0), (3, 2, 0), (3, 0, 0)]
 
 
-def decide(data, u, prior):
+VIEW_IDS = (4811, 7660)       # runtime ids of the tiled background views (decomp tiled-views manifest)
+
+
+def decide(data, u, prior, idx=-1):
     size = len(data)
     pm = u["pal"]
     best = None
@@ -117,7 +120,7 @@ def decide(data, u, prior):
         for f, s, p in kinds:
             cands += candidates(size - p, f, s, p, exact if exact and exact <= size - p else None)
         src = "ref"
-    if not u["uses"] and size in TILE_VIEW:
+    if not u["uses"] and size in TILE_VIEW and VIEW_IDS[0] <= idx <= VIEW_IDS[1]:
         # background view tiles: 64x32 storage proven by the tiled renderer (decomp docs/rzip-assets.md)
         f, s, p = TILE_VIEW[size]
         return dict(fmt=f, siz=s, pal=p, swap=True, levels=[[0, TL.stride_for(64, s), 64, 32]]), "view"
@@ -159,7 +162,7 @@ def main(argv):
             continue
         u = usages[str(i)]
         if u["uses"] or u["pal"]:
-            lay, src = decide(e.data, u, {})
+            lay, src = decide(e.data, u, {}, i)
             lays[i] = (lay, src)
             prior_n[len(e.data)][(lay["fmt"], lay["siz"], lay["pal"])] += 1
     out = {}
@@ -176,7 +179,7 @@ def main(argv):
             c = prior_n[len(e.data)]
             tot = sum(c.values())
             prior = {k: 1.0 - 0.3 * n / tot for k, n in c.items()} if tot else {}
-            lay, src = decide(e.data, usages[str(i)], prior)
+            lay, src = decide(e.data, usages[str(i)], prior, i)
         img = TL.decode_level(e.data, lay)
         h, w = img.shape[:2]
         n = 16 if max(w, h) >= 128 else 4
