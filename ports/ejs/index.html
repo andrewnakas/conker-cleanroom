@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conker's Bad Fur Day — clean room</title>
+<style>
+  :root { --bg:#101218; --fg:#e8e8ee; --dim:#9aa0ad; --accent:#d99a2b; }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--fg); font:14px/1.4 system-ui,sans-serif; }
+  #wrap { display:flex; flex-direction:column; height:100%; }
+  #game { flex:1; min-height:0; }
+  #bar { padding:6px 16px; color:var(--dim); font-size:12px; display:flex; gap:16px; flex-wrap:wrap; }
+  #bar b { color:var(--fg); font-weight:600; }
+  #bar a { color:var(--dim); }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div id="game"></div>
+  <div id="bar">
+    <span><b>Conker's Bad Fur Day — clean room</b> (all art and sound regenerated; <a href="https://github.com/andrewnakas/conker-cleanroom">source</a>)</span>
+    <span>Keys: <b>Arrows</b> move · <b>X</b> A (jump) · <b>C</b> B (attack) · <b>Z</b> Z (crouch) · <b>S</b> R (camera) · <b>Q</b> L · <b>Enter</b> Start · <b>I J K L</b> C-buttons. Gamepads work too.</span>
+  </div>
+</div>
+<script>
+(function () {
+  const q = new URLSearchParams(location.search);
+  // keyboard layout (EmulatorJS n64 ids: 0 A, 1 B, 3 Start, 4-7 D-pad, 10 L, 11 R, 12 Z,
+  // 16/17 stick right/left, 18/19 stick down/up, 20-23 C right/left/down/up)
+  const k = (v, g) => ({ value: v, value2: g || "" });
+  const P1 = {
+    0: k("x", "BUTTON_1"), 1: k("c", "BUTTON_3"), 3: k("enter", "START"),
+    4: k("t", "DPAD_UP"), 5: k("g", "DPAD_DOWN"), 6: k("f", "DPAD_LEFT"), 7: k("h", "DPAD_RIGHT"),
+    10: k("q", "LEFT_TOP_SHOULDER"), 11: k("s", "RIGHT_TOP_SHOULDER"), 12: k("z", "LEFT_BOTTOM_SHOULDER"),
+    16: k("right arrow", "LEFT_STICK_X:+1"), 17: k("left arrow", "LEFT_STICK_X:-1"),
+    18: k("down arrow", "LEFT_STICK_Y:+1"), 19: k("up arrow", "LEFT_STICK_Y:-1"),
+    20: k("l", "RIGHT_STICK_X:+1"), 21: k("j", "RIGHT_STICK_X:-1"),
+    22: k("k", "RIGHT_STICK_Y:+1"), 23: k("i", "RIGHT_STICK_Y:-1"),
+  };
+  window.EJS_player = "#game";
+  window.EJS_core = "mupen64plus_next";
+  window.EJS_gameName = "conker-cleanroom";
+  window.EJS_gameUrl = q.get("rom") || "conker.z64";
+  window.EJS_pathtodata = "data/";
+  window.EJS_startOnLoaded = true;
+  window.EJS_disableDatabases = true;
+  window.EJS_threads = false;
+  window.EJS_color = "#d99a2b";
+  window.EJS_defaultControls = { 0: P1, 1: {}, 2: {}, 3: {} };
+  window.EJS_defaultOptions = { "mupen64plus-rdp-plugin": "gliden64", "mupen64plus-rsp-plugin": "hle" };
+  // dev: ?opts=key:value;key:value overrides core options
+  for (const kv of (q.get("opts") || "").split(";").filter(Boolean)) {
+    const i = kv.indexOf(":");
+    window.EJS_defaultOptions["mupen64plus-" + kv.slice(0, i)] = kv.slice(i + 1);
+  }
+
+  // ---- dev hooks: ?dump=5,10 (screenshots to console), ?keys=t:id:dur[:val],... ----
+  const log = (m) => console.log(m);
+  window.EJS_onGameStart = function () {
+    const t0 = performance.now();
+    log("CBFD: game started");
+    const E = window.EJS_emulator;
+    if (q.get("keys")) {
+      for (const ev of q.get("keys").split(",")) {
+        const [t, id, dur, val] = ev.split(":");
+        const v = val ? parseInt(val) : (+id >= 16 ? 0x7fff : 1);
+        setTimeout(() => E.gameManager.simulateInput(0, +id, v), +t * 1000);
+        setTimeout(() => E.gameManager.simulateInput(0, +id, 0), (+t + (+dur || 0.15)) * 1000);
+      }
+    }
+    if (q.get("dump")) {
+      // one screenshot at a time; each waits for its time and for the previous one
+      const times = q.get("dump").split(",").map(Number);
+      let chain = Promise.resolve();
+      const shot = (s) => new Promise((res) => {
+        const wait = Math.max(0, t0 + s * 1000 - performance.now());
+        setTimeout(() => {
+          const done = setTimeout(() => { log(`CBFD: shot ${s} timed out`); res(); }, 8000);
+          try {
+            E.screenshot((blob) => {
+              const r = new FileReader();
+              r.onload = () => {
+                const d = r.result, n = 8000;
+                for (let o = 0; o < d.length; o += n) log(`PW64PNG:${s}:${d.slice(o, o + n)}`);
+                log(`PW64PNG:${s}:END`);
+                clearTimeout(done); res();
+              };
+              r.readAsDataURL(blob);
+            }, "canvas", "png", 1);
+          } catch (e) { log(`CBFD: shot ${s} failed ${e}`); clearTimeout(done); res(); }
+        }, wait);
+      });
+      for (const s of times) chain = chain.then(() => shot(s));
+    }
+    if (q.get("hb")) setInterval(() => log(`CBFDHB ${((performance.now() - t0) / 1000).toFixed(0)}s`), 5000);
+  };
+})();
+</script>
+<script src="data/loader.js"></script>
+</body>
+</html>
