@@ -62,9 +62,9 @@
 ## Open problems
 - Title logo (ids 2415-2440, RGBA32 32x32 tiles mapped on a model) and the splash/legal screens (2530-2608) are
   still blurred: the tile arrangement is not a simple grid.
-- Faces that are whole painted textures (Berri 815-817, grey squirrel 965-969/1757-1758, frogs 3690-3695,
-  sunflower 4305-4307, two-eye strips 1286-1288/2401/3490-3492) are still colour grids: the automatic eye fit was
-  poor there and its briefs were removed. They need hand-written briefs.
+- Whole-face textures (Berri 815-817, grey squirrel 965-969/1757-1758, frogs 3690-3695, sunflower 4305-4307,
+  two-eye strips, Conker close-ups 7705/7706) now have hand-written briefs (approximate positions; checked on a
+  clean sheet only, not in-game).
 - Menu chapter-name letter tiles (ids ~1977-2165) not re-typeset yet (which tile holds which letters is unclear).
 - In-game checks so far cover boot, menus and the intro only; signs are checked on contact sheets, audio is not
   listened to (only: no hang).
@@ -81,6 +81,6 @@
 - Play https://andrewnakas.github.io/conker-cleanroom/ : boot, save select, intro, first area. Report what is unreadable
   or wrong first (signs, faces, HUD).
 - Voices are placeholder Piper TTS by pitch band (deep/low/mid/high/female/squeaky), not per character.
-  Practice pack (dirty, never publish): `python -m games.conker.voices practice D:/n64work/conker/baserom.us.z64 D:/n64work/conker/practice`
-  then record each track and `python -m games.conker.voices cut <recording.wav> <track>`.
+  Practice pack is built (dirty, never publish): `D:/n64work/conker/practice` = 34 call-and-response tracks,
+  1795 phrases, `SCRIPT.txt`. Record each track and `python -m games.conker.voices cut <recording.wav> <track>`.
 - Decide whether shipping the game's own program code (see "Note on scope") is OK for this title.
