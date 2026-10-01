@@ -143,6 +143,10 @@ def decide(data, u, prior):
     return scored[0][1], src
 
 
+_OV = os.path.join(os.path.dirname(os.path.abspath(__file__)), "layout_overrides.json")
+OVERRIDES = json.load(open(_OV)) if os.path.exists(_OV) else {}
+
+
 def main(argv):
     r = Rom(argv[1])
     usages = json.load(open(argv[2]))
@@ -163,7 +167,10 @@ def main(argv):
     for i, e in enumerate(r.flat):
         if e is None:
             continue
-        if i in lays:
+        if str(i) in OVERRIDES:
+            f, sz, p, w, h = OVERRIDES[str(i)]
+            lay, src = dict(fmt=f, siz=sz, pal=p, swap=True, levels=[[0, TL.stride_for(w, sz), w, h]]), "fixed"
+        elif i in lays:
             lay, src = lays[i]
         else:
             c = prior_n[len(e.data)]

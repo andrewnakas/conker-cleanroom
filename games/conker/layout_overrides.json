@@ -1,0 +1,38 @@
+{
+"_doc": "Layout fixes for textures whose statistics-based guess was wrong: id -> [fmt, siz, pal bytes, w, h]. Decided from dirty contact sheets (neighbouring ids of the same set).",
+"2877": [
+2,
+1,
+512,
+16,
+16
+],
+"2880": [
+2,
+1,
+512,
+16,
+16
+],
+"2884": [
+2,
+1,
+512,
+16,
+16
+],
+"2885": [
+2,
+1,
+512,
+16,
+16
+],
+"2887": [
+2,
+1,
+512,
+32,
+32
+]
+}
