@@ -31,16 +31,41 @@
 - Other banks checked: 05 = Huffman-coded per-scene structure data (not pixels), 06/08/13/1A/1C nested text/data,
   02/0F animation, 0B/0C/0E placements, 14 scripts: all kept (geometry / text / code-like).
 
+## Published (2026-10-01 ~11:55)
+- Repo https://github.com/andrewnakas/conker-cleanroom (public), site https://andrewnakas.github.io/conker-cleanroom/
+  (gh-pages = EmulatorJS 4.2.3 + mupen64plus-next with its ROM-DB entry "Conker's BFD (U) [T+Fre1.3]" pointed at our
+  ROM's MD5 for EEPROM 16 KB). `games/conker/publish.sh` regenerates, refuses to publish unless taint passes, pushes.
+- Taint: **0 failing of 21,565 streams** (flat raw + RGBA, sprites, font, ADPCM, books, loop states, MP3 speech).
+- Verified in headless Edge on the clean ROM: N64 logo, Rareware scene, save select, NEW GAME, intro cutscenes
+  (Conker close-up, throne room, title), pause menu. No hangs with the regenerated audio or speech streams.
+- **Note on scope**: the decomp is only ~16% C, so the ROM's program code is the game's own code (not compiled from
+  the decomp), as in the PW64 recomp route / the option named in CLAUDE.md. Say if that is not wanted for this one.
+
+## Facts learned (traps)
+- The RLE font table must fill exactly the retail span (the game walks it to the end): a shorter table = black boot.
+  Runs are split until the size matches (`fonts.build`).
+- MP3 speech frames with the copyright bit carry a 9-byte `L:` lip-sync cue record after the frame (standard
+  decoders lose sync there). `voice_spec.plain_mp3` strips them to decode; `voices.with_cues` re-attaches the kept cues.
+- Flat ids are runtime ids (two empty slots at 1767/1768): decomp "flat index" + 2 above 1767.
+- Text on a cut-out keeps the retail lettering in its alpha outline: `drawn.draw_text` always redraws alpha there.
+- Headless Edge can take > 20 s to start under load (`cdp_shot.py` waits up to 2 min now).
+
 ## Open problems
-- **System font (RLE table at ROM 0x40F10)**: the redrawn table makes the boot go black. Under test: checksum over the
-  boot segment vs. my table being shorter than retail (walk past the end).
-- Speech (bank 16, 453 MP3 streams, ~2 h): Whisper small.en on CPU is transcribing (GPU has no CUDA libs);
-  then Piper placeholders (`voices.py`), encode, taint.
-- Game code cannot be recompressed (black screen), so no code patches for now.
+- Speech: Whisper small.en on CPU is still transcribing (GPU has no CUDA libs). Streams without a transcript are
+  faint-noise fillers for now; rerun `python -m games.conker.voices build` + `publish.sh` when `spec/voices.json` exists.
+- Game code cannot be recompressed (black screen), so no code patches.
+- Layout of 1720 textures is a guess from statistics; a few may have the wrong width (they show as noise in-game).
 
 ## Next
-- Texture census: format/size per flat id from display-list references, then grid+alpha regeneration.
-- Fonts (RLE table 0x40F10), audio banks (bank 17), MP3 speech (bank 16, 453 streams), other banks census.
+- Eyes: lids and two-eye textures in `eyefit.py`; Conker's own face frames (64x32 CI4, dynamic segments).
+- Text: menu chapter-name letter tiles (ids ~1977-2165, 2419-2435, 2530-2605), A-Z blocks (2876-2906), newspapers
+  (3403-3406), title logo tiles, intro legal/logo screens, "The Weasels" (1821), EXIT (4089/4090).
+- Skyboxes (35 views of 60x30 tiles) are plain colour grids; fine at a distance.
 
 ## For the morning
-- (nothing yet)
+- Play https://andrewnakas.github.io/conker-cleanroom/ : boot, save select, intro, first area. Report what is unreadable
+  or wrong first (signs, faces, HUD).
+- Voices are placeholder Piper TTS by pitch band (deep/low/mid/high/female/squeaky), not per character.
+  Practice pack (dirty, never publish): `python -m games.conker.voices practice D:/n64work/conker/baserom.us.z64 D:/n64work/conker/practice`
+  then record each track and `python -m games.conker.voices cut <recording.wav> <track>`.
+- Decide whether shipping the game's own program code (see "Note on scope") is OK for this title.
