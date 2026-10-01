@@ -21,7 +21,7 @@ A playable **web build** of Conker's Bad Fur Day, built from the community decom
 
 ## Where things are
 - This folder: your repo. `cleanroom/` shared library (copy; extend freely here), `ports/`, `tools/`, `docs/DECOMP_PLAYBOOK.md` (**read first**, it is the checklist of traps), `docs/HARNESS.md` (PW64 lessons), `reference/sm64/` (the finished SM64 game module to copy patterns from: generate.py, drawn.py, facepaint briefs, paintings.py, level_render.py, voices).
-- Work dirs: `D:/n64work/conker/` (pristine, dirty, clean, build). Build on D: (C: and E: are full). emsdk: `E:/n64web/emsdk` (EM_CACHE=E:/n64web/emcache).
+- Work dirs: `D:/n64work/conker/` (pristine, dirty, clean, build). Build on D: (C: and E: are full). **E: is unplugged**: the emsdk at E:/n64web/emsdk is gone; if the web route needs Emscripten, install emsdk once into the shared `D:/n64work/emsdk`.
 - Toolchain: `tools/setup_winbin.sh` (zig cc as gcc, clang as `as`, llvm-objcopy, hexdump, python3, make). IDO 5.3 native: `C:/Users/andre/n64work/idowin` (see PW64 `tools/idowin`); IDO 7.1 if needed from ido-static-recomp releases (Windows builds). Zig: `~/.local/zig-x86_64-windows-0.16.0`, LLVM: `~/.local/clang+llvm-23.1.2-x86_64-pc-windows-msvc`.
 - Python 3.12 with numpy, scipy, librosa, pyworld, piper-tts (voices: `C:/Users/andre/n64work/piper_voices`), faster-whisper, av, websocket-client.
 - Browser checks: `python ports/wasm/serve.py <site> <port>` + `python ports/wasm/headless_shot.py <out> --base http://localhost:<port>/index.html --secs 5,10 --query "keys=..." --webgl`; hangs: `ports/wasm/cdp_stack.py`. Page template with dev hooks: `ports/web/shell.html`.
