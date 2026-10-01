@@ -121,4 +121,10 @@ def face(i, d, brief):
     from cleanroom.gfx import facepaint
     _, _, w, h = d["levels"][0]
     alpha = cgen.unpack_alpha2(d["alpha2"], w, h) if "alpha2" in d else None
-    return facepaint.render(brief, w, h, grid=d["grid"], alpha=alpha, seed=cgen.h32("face", i))
+    grid = d["grid"]
+    if brief.get("flip"):                     # painted upside down (lid on the far rows), then flipped back
+        n = int(round(len(grid) ** 0.5))
+        grid = [c for row in reversed([grid[k * n:(k + 1) * n] for k in range(n)]) for c in row]
+        alpha = alpha[::-1] if alpha is not None else None
+    out = facepaint.render(brief, w, h, grid=grid, alpha=alpha, seed=cgen.h32("face", i))
+    return out[::-1] if brief.get("flip") else out

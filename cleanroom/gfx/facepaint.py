@@ -16,6 +16,7 @@ Primitives (one key names the kind):
   {"arc": [cx, cy, rx, ry, a0, a1], "w": width, "c"}   arc, degrees, 90 = down
   {"rect": [x0, y0, x1, y1], "c": rgb}
   {"clip": [cx, cy, rx, ry]} / {"clip": null}          limit later ops to an ellipse
+  {"cells": [gx, gy, "0-3 per cell"], "c": rgb, "clip": bool}   coarse coverage map (smooth), optional clip
   {"outline": px, "c": rgb}                            darken the kept alpha edge
   {"eye": {...}}                                       sclera, iris, pupil, gaze, lid
 """
@@ -184,6 +185,20 @@ def render(brief, w, h, grid=None, alpha=None, seed=0):
         elif "rect" in op:
             x0, y0, x1, y1 = op["rect"]
             cv.paint(((cv.x >= x0) & (cv.x <= x1) & (cv.y >= y0) & (cv.y <= y1)).astype(np.float32), c)
+        elif "cells" in op:
+            # coarse coverage map: [gx, gy, "2-bit cells, row major"]; smooth-upsampled and thresholded.
+            gx, gy, cells = op["cells"]
+            g = np.array([int(ch) for ch in cells], np.float32).reshape(gy, gx) / 3.0
+            fx = np.clip(cv.x * gx - 0.5, 0, gx - 1)
+            fy = np.clip(cv.y * gy - 0.5, 0, gy - 1)
+            x0, y0 = np.floor(fx).astype(int), np.floor(fy).astype(int)
+            x1, y1 = np.minimum(x0 + 1, gx - 1), np.minimum(y0 + 1, gy - 1)
+            tx, ty = fx - x0, fy - y0
+            v = (g[y0, x0] * (1 - tx) + g[y0, x1] * tx) * (1 - ty) + (g[y1, x0] * (1 - tx) + g[y1, x1] * tx) * ty
+            m = np.clip((v - 0.5) * 6 + 0.5, 0, 1)
+            cv.paint(m, c)
+            if op.get("clip"):
+                cv.clip = (m > 0.5).astype(np.float32)
         elif "clip" in op:
             cv.clip = None if op["clip"] is None else (cv.ell(*op["clip"]) <= 1).astype(np.float32)
         elif "eye" in op:
