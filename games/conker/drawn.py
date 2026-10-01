@@ -107,4 +107,18 @@ def hooks():
         for k, i in enumerate(ids):
             part = (k, len(ids)) if len(ids) > 1 else None
             out[i] = (lambda i, d, b=b, part=part: draw_text(generate.base_image(i, d), d, b, part))
+    p = os.path.join(HERE, "face_briefs.json")
+    faces = json.load(open(p)) if os.path.exists(p) else {}
+    for key, b in faces.items():
+        if not key.startswith("_"):
+            out[int(key)] = (lambda i, d, b=b: face(i, d, b))
     return out
+
+
+def face(i, d, brief):
+    """Eye / face painted from a brief over the regenerated grid (payload row order)."""
+    from cleanroom.decomp import gen as cgen
+    from cleanroom.gfx import facepaint
+    _, _, w, h = d["levels"][0]
+    alpha = cgen.unpack_alpha2(d["alpha2"], w, h) if "alpha2" in d else None
+    return facepaint.render(brief, w, h, grid=d["grid"], alpha=alpha, seed=cgen.h32("face", i))
