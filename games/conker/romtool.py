@@ -171,6 +171,7 @@ class Rom:
             sizes.append(len(c))
         stream = b"".join(chunks)
         cap = TABLE_START - 15 - FLAT_START
+        self.flat_used = (len(stream), cap)
         assert len(stream) <= cap, f"flat stream {len(stream) - cap} bytes too large"
         out[FLAT_START:TABLE_START] = stream + bytes(TABLE_START - FLAT_START - len(stream))
         struct.pack_into(f">{FLAT_COUNT}H", self.gdata, FLAT_SIZE_TABLE, *sizes)
