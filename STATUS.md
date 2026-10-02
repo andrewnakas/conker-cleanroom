@@ -102,8 +102,9 @@
   wrong guessed layout (fixed in `layout_overrides.json`).
 - PAUSED (2193-2195), Dolby label (1756), GREENS, HAY, WAR, COLORS, Ai, HEIST, LAPS, MULTI, TANK, P1-P4, numerals 1-9,
   "?", Dino / Poops / War, FECK OFF CROWS signs, FEDERAL RESERVE: re-typeset. BOSS was stored top-down (fixed).
-- Verified in-game (headless, clean ROM): both intro cards and PAUSED read cleanly. Not yet seen in-game: NINTENDO
-  PRESENTS, PRESS START, the new menu labels.
+- Verified in-game (headless, clean ROM): NINTENDO PRESENTS, both intro cards and PAUSED read cleanly. Not yet seen
+  in-game: PRESS START, the new menu labels.
+- Local build `devsite/clean.z64` (455 drawn textures): taint **0 failing of 21,565**. Ready to publish once allowed.
 
 ## Open problems
 - Title logo (ids 2415-2440): each 3D letter is its own object made of 2-4 tiles that fly in during the throne-room
