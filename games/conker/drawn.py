@@ -107,12 +107,76 @@ def hooks():
         for k, i in enumerate(ids):
             part = (k, len(ids)) if len(ids) > 1 else None
             out[i] = (lambda i, d, b=b, part=part: draw_text(generate.base_image(i, d), d, b, part))
+    for sc in briefs.get("_screens", []):     # one picture over a grid of tiles
+        for k, i in enumerate(sc["ids"]):
+            out[i] = (lambda i, d, sc=sc, k=k: screen_tile(d, sc, k))
     p = os.path.join(HERE, "face_briefs.json")
     faces = json.load(open(p)) if os.path.exists(p) else {}
     for key, b in faces.items():
         if not key.startswith("_"):
             out[int(key)] = (lambda i, d, b=b: face(i, d, b))
+    if os.environ.get("CONKER_IDS"):          # dev: print the flat id on every not yet identified tile
+        spec = json.load(open(os.path.join(HERE, "spec", "textures.json")))
+        want = os.environ["CONKER_IDS"]
+        from .sheet import parse_ids
+        ids = [int(k) for k, d in spec.items() if d["src"] == "guess"] if want == "guess" else parse_ids(want)
+        for i in ids:
+            if i not in out and str(i) in spec and spec[str(i)]["fmt"] in (texfmt.RGBA, texfmt.CI, texfmt.IA):
+                out[i] = id_tile
     return out
+
+
+def id_tile(i, d):
+    """Dev tile: the id in two rows on a hue that depends on it (storage order = reads upright when not flipped)."""
+    _, _, w, h = d["levels"][0]
+    s = str(i)
+    ink, _ = text_mask([s[:-2], s[-2:]] if w <= h * 1.5 else [s], w, h, "press", 0.9)
+    import colorsys
+    bg = np.array(colorsys.hsv_to_rgb((i * 0.381) % 1.0, 0.75, 0.55), np.float32) * 255
+    out = np.zeros((h, w, 4), np.float32)
+    out[..., :3] = bg * (1 - ink[..., None]) + 255 * ink[..., None]
+    out[..., 3] = 255
+    out[0, :, :3] = 255                       # white line marks the first stored row
+    return out
+
+
+_SCREENS = {}
+
+
+def screen(sc):
+    """Whole picture (H, W, 4) of a tiled screen: text items in coarse boxes (fractions of the picture)."""
+    key = sc["ids"][0]
+    if key in _SCREENS:
+        return _SCREENS[key]
+    tw, th = sc["tile"]
+    rows = sc["rows"]
+    cols = len(sc["ids"]) // rows
+    W, H = cols * tw, rows * th
+    out = np.zeros((H, W, 4), np.float32)
+    out[..., :3] = np.array(sc.get("bg", [0, 0, 0]), np.float32)
+    cover = np.zeros((H, W), np.float32)
+    for it in sc["items"]:
+        x0, y0, x1, y1 = it["box"]
+        x0, x1, y0, y1 = int(x0 * W), int(x1 * W), int(y0 * H), int(y1 * H)
+        ink, edge = text_mask(it["t"].split("|"), x1 - x0, y1 - y0, it.get("font", "luckiest"), 0.98, 1 if it.get("stroke") else 0)
+        reg = out[y0:y1, x0:x1, :3]
+        if it.get("stroke"):
+            reg[:] = reg * (1 - edge[..., None]) + np.array(it["stroke"], np.float32) * edge[..., None]
+        reg[:] = reg * (1 - ink[..., None]) + np.array(it["fg"], np.float32) * ink[..., None]
+        cover[y0:y1, x0:x1] = np.maximum(cover[y0:y1, x0:x1], np.maximum(ink, edge))
+    out[..., 3] = cover * 255
+    _SCREENS[key] = out
+    return out
+
+
+def screen_tile(d, sc, k):
+    tw, th = sc["tile"]
+    rows = sc["rows"]
+    c, r = (k // rows, k % rows) if sc.get("order", "col") == "col" else (k % (len(sc["ids"]) // rows), k // (len(sc["ids"]) // rows))
+    t = screen(sc)[r * th:(r + 1) * th, c * tw:(c + 1) * tw].copy()
+    if "alpha2" not in d or not sc.get("cut"):
+        t[..., 3] = 255
+    return t[::-1] if sc.get("flip") else t
 
 
 def face(i, d, brief):
