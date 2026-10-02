@@ -25,7 +25,9 @@ python ports/ejs/patch_core.py $CLEAN $EJS/data/cores $SITE/data/cores
 cp $CLEAN $W/devsite/clean.z64
 [ "${1:-}" = "--no-push" ] && { echo "site ready (not pushed): $SITE"; exit 0; }
 cd $SITE
+git update-ref -d HEAD 2>/dev/null || true   # single-commit history: each push carries a 64 MB ROM (disk budget)
 git add -A 2>/dev/null
 git -c user.name="andrewnakas" -c user.email="andrewnakas@users.noreply.github.com" commit -qm "site: $(date +%F\ %H:%M)" || true
 git push -f -q origin gh-pages
+git reflog expire --expire=now --all && git gc -q --prune=now
 echo "pushed gh-pages"

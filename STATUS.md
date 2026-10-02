@@ -129,6 +129,13 @@
 - Left as grids: tavern sign pieces 1505-1508, Conker icon 1560, portrait 3408, manual body pages.
 - Publish when free RAM is back above ~10 GB (at 6 GB the taint scan dies with MemoryError).
 
+## Update 2026-10-02 ~02:50 (ninth publish live)
+- Ninth publish 02:32: rom sha1 c8f65a990e8f, taint 0 failing of 21,565; boots to save select (headless check).
+  Contains everything listed in the 02:20 update.
+- `publish.sh` now keeps the site repo at a single commit and gc's it (it had grown to 578 MB).
+- After that publish: Dolby logo is two tiles (1755 + 1756); the left one still showed retail lettering through its
+  alpha. Now one span "DOLBY SURROUND" (committed, goes out with the next publish).
+
 ## Open problems
 - Title logo (ids 2415-2440): each 3D letter is its own object made of 2-4 tiles that fly in during the throne-room
   scene, too small to map with id tiles. It keeps colour grid + letter silhouette (alpha outline). Same for the

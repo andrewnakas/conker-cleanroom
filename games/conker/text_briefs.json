@@ -494,12 +494,18 @@
 "font": "rubik"
 },
 "1755": {
-"t": "SURROUND",
+"t": "DOLBY|SURROUND",
+"span": [
+1755,
+1756
+],
+"flip": false,
 "fg": [
 240,
 240,
 240
 ],
+"cut": true,
 "font": "rubik"
 },
 "2876": {
@@ -2866,21 +2872,6 @@
 ],
 "font": "luckiest",
 "cut": true
-},
-"1756": {
-"t": "DOLBY|SURROUND",
-"flip": false,
-"fg": [
-240,
-240,
-240
-],
-"bg": [
-0,
-0,
-0
-],
-"font": "rubik"
 },
 "2136": {
 "t": "GREENS",
