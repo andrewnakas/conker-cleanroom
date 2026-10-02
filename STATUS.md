@@ -88,9 +88,27 @@
 - Loop stopped here: what is left needs either the tile arrangement of the title logo / splash screens
   (ids 2415-2440, 2530-2608) or play-testing deeper than the first area. Restart with /loop to continue.
 
+## Update 2026-10-01 evening (loop restarted; NOT yet published)
+- **Push blocked**: `games/conker/publish.sh` was denied by the auto-mode permission check ("Out-of-Place Publication"),
+  so the live site is still the fifth publish. Everything below is committed here and built into
+  `D:/n64work/conker/devsite/clean.z64` only. To publish: run `bash games/conker/publish.sh` yourself (it still
+  refuses when the taint scan fails) or add a Bash permission rule for it.
+- New dev tool, **id tiles**: `CONKER_IDS=guess python -m games.conker.generate <retail> devsite/ids.z64` prints the flat id on
+  every not-yet-identified tile (white line = first stored row), so one screenshot gives the tile arrangement and
+  orientation. `python -m games.conker.mosaic <rom> out.png <ids> r<rows>` lays tiles out (column-major).
+- Tiled pictures solved this way and re-typeset as whole screens (`"_screens"` in `text_briefs.json`, ids run down each
+  column): NINTENDO / PRESENTS (2530-2547, 9x2 of 32x64 RGBA16), A RAREWARE GAME (2568-2585, 9x2), STARRING CONKER & BERRI
+  (2586-2609, 8x3), PRESS START + its shadow layer (2558-2567 / 2548-2557, 5x2 of 32x32). 22 tiles of those sets had a
+  wrong guessed layout (fixed in `layout_overrides.json`).
+- PAUSED (2193-2195), Dolby label (1756), GREENS, HAY, WAR, COLORS, Ai, HEIST, LAPS, MULTI, TANK, P1-P4, numerals 1-9,
+  "?", Dino / Poops / War, FECK OFF CROWS signs, FEDERAL RESERVE: re-typeset. BOSS was stored top-down (fixed).
+- Verified in-game (headless, clean ROM): both intro cards and PAUSED read cleanly. Not yet seen in-game: NINTENDO
+  PRESENTS, PRESS START, the new menu labels.
+
 ## Open problems
-- Title logo (ids 2415-2440, RGBA32 32x32 tiles mapped on a model) and the splash/legal screens (2530-2608) are
-  still blurred: the tile arrangement is not a simple grid.
+- Title logo (ids 2415-2440): each 3D letter is its own object made of 2-4 tiles that fly in during the throne-room
+  scene, too small to map with id tiles. It keeps colour grid + letter silhouette (alpha outline). Same for the
+  Rareware badge lettering (2461-2525) and the Conker portrait mosaic (2441-2460).
 - Whole-face textures (Berri 815-817, grey squirrel 965-969/1757-1758, frogs 3690-3695, sunflower 4305-4307,
   two-eye strips, Conker close-ups 7705/7706) now have hand-written briefs (approximate positions; checked on a
   clean sheet only, not in-game).
