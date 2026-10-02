@@ -106,6 +106,9 @@
   in-game: PRESS START, the new menu labels.
 - Local build `devsite/clean.z64` (455 drawn textures): taint **0 failing of 21,565**. Ready to publish once allowed.
 
+- First-area walk on this build (headless, ~13 min): Conker is controllable and the field, fence and scarecrow render
+  fine; emulation was too slow under load to reach any sign or character. Loop stopped: waiting on the publish.
+
 ## Open problems
 - Title logo (ids 2415-2440): each 3D letter is its own object made of 2-4 tiles that fly in during the throne-room
   scene, too small to map with id tiles. It keeps colour grid + letter silhouette (alpha outline). Same for the
