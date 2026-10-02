@@ -2,7 +2,8 @@
 
 `text_briefs.json`: { "<flat id>": {"t": "LINE|LINE", "fg": [r,g,b], "bg": [r,g,b] | null, "flip": bool,
                                    "font": "lilita|luckiest|rubik|press", "cut": bool, "stroke": [r,g,b] | null,
-                                   "span": [ids...]  (one text across several tiles, left to right)} }
+                                   "span": [ids...]  (one text across several tiles, left to right),
+                                   "box": [x0,y0,x1,y1] (fractions of the upright picture)} }
 The words are the text as it appears in the game (kept fact); the lettering is ours (OFL fonts in ./fonts).
 bg null keeps the regenerated colour grid behind the text. flip = payload rows stored bottom-up.
 """
@@ -62,12 +63,14 @@ def draw_text(base, d, brief, part=None):
     h, w = base.shape[:2]
     lines = brief["t"].split("|")
     stroke = 1 if brief.get("stroke") else 0
-    if part:                                  # one text over several tiles
-        k, n = part
-        ink, edge = text_mask(lines, w * n, h, brief.get("font", "lilita"), brief.get("fill", 0.92), stroke)
-        ink, edge = ink[:, k * w:(k + 1) * w], edge[:, k * w:(k + 1) * w]
-    else:
-        ink, edge = text_mask(lines, w, h, brief.get("font", "lilita"), brief.get("fill", 0.92), stroke)
+    k, n = part or (0, 1)                     # one text over several tiles
+    W = w * n
+    x0, y0, x1, y1 = brief.get("box", [0, 0, 1, 1])     # coarse placement (fractions of the upright picture)
+    x0, x1, y0, y1 = int(x0 * W), int(x1 * W), int(y0 * h), int(y1 * h)
+    ink, edge = np.zeros((h, W), np.float32), np.zeros((h, W), np.float32)
+    ink[y0:y1, x0:x1], edge[y0:y1, x0:x1] = text_mask(lines, x1 - x0, y1 - y0, brief.get("font", "lilita"),
+                                                      brief.get("fill", 0.92), stroke)
+    ink, edge = ink[:, k * w:(k + 1) * w], edge[:, k * w:(k + 1) * w]
     if brief.get("flip", True):
         ink, edge = ink[::-1], edge[::-1]
     fg = np.array(brief.get("fg", [255, 255, 255]), np.float32)
