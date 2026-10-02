@@ -109,6 +109,12 @@
 - First-area walk on this build (headless, ~13 min): Conker is controllable and the field, fence and scarecrow render
   fine; emulation was too slow under load to reach any sign or character. Loop stopped: waiting on the publish.
 
+## Update 2026-10-01 ~23:20 (seventh + eighth publish)
+- Seventh publish 22:56 (GAME OVER, rom sha1 36afb4895143, taint passed). Source `main` pushed too.
+- Verified in-game on that build: multiplayer menu MULTI / WAR / SET-UP / COLORS read cleanly.
+- Then fixed and published again: TOTAL WAR pills (1984-1987, the left half still showed retail lettering through its
+  alpha), ON / OFF bubbles (1988/1989), CHEATS (1997/1998), BATS (1974-1976), dim COLORS (1999/2000).
+
 ## Open problems
 - Title logo (ids 2415-2440): each 3D letter is its own object made of 2-4 tiles that fly in during the throne-room
   scene, too small to map with id tiles. It keeps colour grid + letter silhouette (alpha outline). Same for the
