@@ -121,6 +121,14 @@
 - The eighth build (rom sha1 522c4d173002) passed taint in the 23:17 run and is committed in `D:/n64work/conker/site`
   (57f3705). **Pushed 2026-10-02 ~01:50** (eighth publish live). RAM still tight (7 GB free): light work only.
 
+## Update 2026-10-02 ~02:20 (committed, waiting for RAM to publish)
+- Text briefs can now be placed with `"box": [x0,y0,x1,y1]` (fractions of the upright picture).
+- New since the eighth publish (contact sheets only, not built/tainted yet): B pads (92, 1575, 2847), timer 00:00 (3436),
+  target (4389), clocks (7179-7182), fire icon (2858), TNT barrel (876/877), $ bag, 4 HIRE / 4 PLAY signs, blueprint
+  and plan labels (1061, 1063, 3594-3599), manual cover WHAT TO DO (7741-7744, 2x2 guessed).
+- Left as grids: tavern sign pieces 1505-1508, Conker icon 1560, portrait 3408, manual body pages.
+- Publish when free RAM is back above ~10 GB (at 6 GB the taint scan dies with MemoryError).
+
 ## Open problems
 - Title logo (ids 2415-2440): each 3D letter is its own object made of 2-4 tiles that fly in during the throne-room
   scene, too small to map with id tiles. It keeps colour grid + letter silhouette (alpha outline). Same for the
