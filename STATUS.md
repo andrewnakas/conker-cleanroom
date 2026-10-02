@@ -116,6 +116,11 @@
   `bash games/conker/publish.sh` when RAM is free. Committed but not yet live: TOTAL WAR pills (1984-1987, the left half still showed retail lettering through its
   alpha), ON / OFF bubbles (1988/1989), CHEATS (1997/1998), BATS (1974-1976), dim COLORS (1999/2000).
 
+## Update 2026-10-02 ~01:10 (blocked on memory)
+- The machine is out of memory (taint scan died with MemoryError, git/bash could not fork). Heavy work paused.
+- The eighth build (rom sha1 522c4d173002) passed taint in the 23:17 run and is committed in `D:/n64work/conker/site`
+  (57f3705) but **not pushed**. All that is left: `git -C D:/n64work/conker/site push -f origin gh-pages`.
+
 ## Open problems
 - Title logo (ids 2415-2440): each 3D letter is its own object made of 2-4 tiles that fly in during the throne-room
   scene, too small to map with id tiles. It keeps colour grid + letter silhouette (alpha outline). Same for the
