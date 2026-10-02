@@ -185,7 +185,8 @@
 "2170": {
 "t": "BOSS",
 "cut": true,
-"font": "rubik"
+"font": "rubik",
+"flip": false
 },
 "2173": {
 "t": "Dung...",
@@ -220,20 +221,20 @@
 "2227": {
 "t": "FECK OFF|CROWS",
 "fg": [
-240,
-235,
-220
+225,
+225,
+215
 ],
-"font": "luckiest"
+"font": "rubik"
 },
 "2228": {
 "t": "FECK|OFF!",
 "fg": [
-240,
 235,
-220
+235,
+235
 ],
-"font": "luckiest"
+"font": "rubik"
 },
 "2875": {
 "t": "KEEP|OUT!",
@@ -1051,27 +1052,27 @@
 },
 "2229": {
 "t": "FEDERAL",
+"fg": [
+205,
+205,
+210
+],
 "span": [
 2229,
 2230
-],
-"fg": [
-235,
-235,
-235
 ],
 "font": "rubik"
 },
 "2231": {
 "t": "RESERVE",
+"fg": [
+205,
+205,
+210
+],
 "span": [
 2231,
 2232
-],
-"fg": [
-235,
-235,
-235
 ],
 "font": "rubik"
 },
@@ -2515,6 +2516,148 @@
 ]
 }
 ]
+},
+{
+"_what": "intro card 0 (9x2 tiles of 32x64)",
+"ids": [
+2530,
+2531,
+2532,
+2533,
+2534,
+2535,
+2536,
+2537,
+2538,
+2539,
+2540,
+2541,
+2542,
+2543,
+2544,
+2545,
+2546,
+2547
+],
+"rows": 2,
+"tile": [
+32,
+64
+],
+"items": [
+{
+"t": "NINTENDO",
+"box": [
+0.03,
+0.2,
+0.97,
+0.57
+],
+"fg": [
+215,
+35,
+20
+],
+"stroke": [
+235,
+200,
+60
+]
+},
+{
+"t": "PRESENTS",
+"box": [
+0.2,
+0.65,
+0.78,
+0.85
+],
+"fg": [
+235,
+25,
+20
+]
+}
+]
+},
+{
+"_what": "PRESS START shadow layer (5x2 tiles of 32x32, IA8)",
+"ids": [
+2548,
+2549,
+2550,
+2551,
+2552,
+2553,
+2554,
+2555,
+2556,
+2557
+],
+"rows": 2,
+"tile": [
+32,
+32
+],
+"cut": true,
+"items": [
+{
+"t": "PRESS START",
+"box": [
+0.1,
+0.36,
+0.9,
+0.64
+],
+"fg": [
+205,
+205,
+205
+]
+}
+]
+},
+{
+"_what": "PRESS START (5x2 tiles of 32x32)",
+"ids": [
+2558,
+2559,
+2560,
+2561,
+2562,
+2563,
+2564,
+2565,
+2566,
+2567
+],
+"rows": 2,
+"tile": [
+32,
+32
+],
+"cut": true,
+"items": [
+{
+"t": "PRESS START",
+"box": [
+0.1,
+0.36,
+0.9,
+0.64
+],
+"fg": [
+20,
+150,
+30
+],
+"stroke": [
+10,
+60,
+15
+]
+}
+]
 }
 ],
 "2193": {
@@ -2552,5 +2695,498 @@
 0
 ],
 "font": "rubik"
+},
+"2136": {
+"t": "GREENS",
+"fg": [
+40,
+140,
+40
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+15,
+50,
+15
+],
+"span": [
+2136,
+2137,
+2138
+]
+},
+"2080": {
+"t": "U",
+"fg": [
+215,
+170,
+95
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+120,
+85,
+40
+]
+},
+"2081": {
+"t": "G",
+"fg": [
+215,
+170,
+95
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+120,
+85,
+40
+]
+},
+"2020": {
+"t": "HAY",
+"fg": [
+245,
+200,
+30
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+150,
+110,
+10
+],
+"span": [
+2020,
+2021,
+2022
+]
+},
+"1985": {
+"t": "WAR",
+"fg": [
+40,
+100,
+40
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+20,
+30,
+20
+]
+},
+"1987": {
+"t": "WAR",
+"fg": [
+130,
+235,
+50
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+20,
+60,
+20
+]
+},
+"2001": {
+"t": "COLORS",
+"fg": [
+130,
+235,
+50
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+20,
+60,
+20
+],
+"span": [
+2001,
+2002
+]
+},
+"2166": {
+"t": "Ai",
+"fg": [
+200,
+160,
+125
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+110,
+80,
+60
+]
+},
+"2176": {
+"t": "8",
+"fg": [
+30,
+140,
+140
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+215,
+180,
+60
+]
+},
+"2177": {
+"t": "5",
+"fg": [
+225,
+50,
+160
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+215,
+180,
+60
+]
+},
+"2178": {
+"t": "4",
+"fg": [
+30,
+30,
+130
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+215,
+180,
+60
+]
+},
+"2191": {
+"t": "9",
+"fg": [
+30,
+80,
+225
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+215,
+180,
+60
+]
+},
+"2192": {
+"t": "1",
+"fg": [
+170,
+50,
+200
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+215,
+180,
+60
+]
+},
+"2209": {
+"t": "7",
+"fg": [
+120,
+215,
+140
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+215,
+180,
+60
+]
+},
+"2210": {
+"t": "6",
+"fg": [
+215,
+25,
+25
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+215,
+180,
+60
+]
+},
+"2216": {
+"t": "3",
+"fg": [
+40,
+140,
+235
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+215,
+180,
+60
+]
+},
+"2219": {
+"t": "2",
+"fg": [
+245,
+200,
+30
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+215,
+180,
+60
+]
+},
+"2196": {
+"t": "P1",
+"fg": [
+215,
+25,
+25
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+215,
+180,
+60
+]
+},
+"2197": {
+"t": "P2",
+"fg": [
+25,
+50,
+215
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+215,
+180,
+60
+]
+},
+"2198": {
+"t": "P3",
+"fg": [
+30,
+150,
+40
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+215,
+180,
+60
+]
+},
+"2199": {
+"t": "P4",
+"fg": [
+245,
+190,
+30
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+215,
+180,
+60
+]
+},
+"2180": {
+"t": "HEIST",
+"fg": [
+250,
+190,
+40
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+190,
+110,
+10
+],
+"span": [
+2180,
+2181,
+2182
+]
+},
+"2186": {
+"t": "LAPS",
+"fg": [
+20,
+20,
+20
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+235,
+235,
+240
+]
+},
+"2188": {
+"t": "MULTI",
+"fg": [
+160,
+40,
+200
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+215,
+180,
+60
+],
+"span": [
+2188,
+2189,
+2190
+]
+},
+"2212": {
+"t": "TANK",
+"fg": [
+190,
+190,
+205
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+90,
+90,
+110
+],
+"span": [
+2212,
+2213,
+2214
+]
+},
+"2201": {
+"t": "?",
+"fg": [
+235,
+235,
+235
+],
+"flip": false,
+"cut": true,
+"font": "luckiest"
+},
+"2174": {
+"t": "Dino",
+"cut": true,
+"flip": false,
+"font": "rubik"
+},
+"2200": {
+"t": "Poops",
+"cut": true,
+"flip": false,
+"font": "rubik"
+},
+"2221": {
+"t": "War",
+"cut": true,
+"flip": false,
+"font": "rubik"
+},
+"2252": {
+"t": "FEDERAL",
+"fg": [
+205,
+205,
+210
+],
+"span": [
+2252,
+2253
+],
+"font": "rubik"
+},
+"2254": {
+"t": "RESERVE",
+"fg": [
+205,
+205,
+210
+],
+"span": [
+2254,
+2255
+],
+"font": "rubik"
+},
+"2287": {
+"t": "2",
+"fg": [
+240,
+240,
+235
+],
+"flip": false
 }
 }
