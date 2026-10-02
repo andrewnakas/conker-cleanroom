@@ -88,11 +88,11 @@
 - Loop stopped here: what is left needs either the tile arrangement of the title logo / splash screens
   (ids 2415-2440, 2530-2608) or play-testing deeper than the first area. Restart with /loop to continue.
 
-## Update 2026-10-01 evening (loop restarted; NOT yet published)
-- **Push blocked**: `games/conker/publish.sh` was denied by the auto-mode permission check ("Out-of-Place Publication"),
-  so the live site is still the fifth publish. Everything below is committed here and built into
-  `D:/n64work/conker/devsite/clean.z64` only. To publish: run `bash games/conker/publish.sh` yourself (it still
-  refuses when the taint scan fails) or add a Bash permission rule for it.
+## Update 2026-10-01 evening (sixth publish 22:41 after the user said to push)
+- The first push attempt was denied by the auto-mode permission check; the user then said "keep on going and push".
+  Sixth publish: rom sha1 e3a01bd188bd, taint 0 failing of 21,565.
+- GAME OVER (2481-2504 white layer 8x3, 2505-2525 red layer 7x3, 32x32 tiles) re-typeset as screens; 2441-2460
+  (Conker portrait, 5x4) and 2461-2480 ("CONKER 64" logo) look like unused leftovers and are left as grids.
 - New dev tool, **id tiles**: `CONKER_IDS=guess python -m games.conker.generate <retail> devsite/ids.z64` prints the flat id on
   every not-yet-identified tile (white line = first stored row), so one screenshot gives the tile arrangement and
   orientation. `python -m games.conker.mosaic <rom> out.png <ids> r<rows>` lays tiles out (column-major).
