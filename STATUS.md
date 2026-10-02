@@ -119,7 +119,7 @@
 ## Update 2026-10-02 ~01:10 (blocked on memory)
 - The machine is out of memory (taint scan died with MemoryError, git/bash could not fork). Heavy work paused.
 - The eighth build (rom sha1 522c4d173002) passed taint in the 23:17 run and is committed in `D:/n64work/conker/site`
-  (57f3705) but **not pushed**. All that is left: `git -C D:/n64work/conker/site push -f origin gh-pages`.
+  (57f3705). **Pushed 2026-10-02 ~01:50** (eighth publish live). RAM still tight (7 GB free): light work only.
 
 ## Open problems
 - Title logo (ids 2415-2440): each 3D letter is its own object made of 2-4 tiles that fly in during the throne-room
