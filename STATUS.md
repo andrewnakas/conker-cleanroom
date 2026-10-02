@@ -136,6 +136,11 @@
 - After that publish: Dolby logo is two tiles (1755 + 1756); the left one still showed retail lettering through its
   alpha. Now one span "DOLBY SURROUND" (committed, goes out with the next publish).
 
+## Update 2026-10-02 ~03:10 (tenth publish live, loop stopped)
+- Tenth publish: rom sha1 951bd1962a3d, taint 0 failing of 21,565, with the Dolby span. Site repo is one commit (62 MB).
+- Headless play-testing is unreliable under load: a 13 min run only reached save select and the timed key presses
+  missed. Nothing past the menus / first field has been verified in-game. Needs a person playing the site.
+
 ## Open problems
 - Title logo (ids 2415-2440): each 3D letter is its own object made of 2-4 tiles that fly in during the throne-room
   scene, too small to map with id tiles. It keeps colour grid + letter silhouette (alpha outline). Same for the
@@ -155,6 +160,8 @@
 - Skyboxes (35 views of 60x30 tiles) are plain colour grids; fine at a distance.
 
 ## For the morning
+- Unverified in-game (preview sheets only): GAME OVER, PRESS START, B pads, timer, target, clocks, fire icon, TNT,
+  $ bag, 4 HIRE / 4 PLAY, plan labels, manual cover (2x2 layout guessed), TOTAL WAR / ON / OFF / CHEATS / BATS.
 - Play https://andrewnakas.github.io/conker-cleanroom/ : boot, save select, intro, first area. Report what is unreadable
   or wrong first (signs, faces, HUD).
 - Voices are placeholder Piper TTS by pitch band (deep/low/mid/high/female/squeaky), not per character.
