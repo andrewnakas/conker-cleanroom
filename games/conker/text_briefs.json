@@ -2874,38 +2874,6 @@
 2022
 ]
 },
-"1985": {
-"t": "WAR",
-"fg": [
-40,
-100,
-40
-],
-"flip": false,
-"cut": true,
-"font": "luckiest",
-"stroke": [
-20,
-30,
-20
-]
-},
-"1987": {
-"t": "WAR",
-"fg": [
-130,
-235,
-50
-],
-"flip": false,
-"cut": true,
-"font": "luckiest",
-"stroke": [
-20,
-60,
-20
-]
-},
 "2001": {
 "t": "COLORS",
 "fg": [
@@ -3292,5 +3260,128 @@
 235
 ],
 "flip": false
+},
+"1984": {
+"t": "TOTAL WAR",
+"fg": [
+40,
+100,
+40
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+20,
+30,
+20
+],
+"span": [
+1984,
+1985
+]
+},
+"1986": {
+"t": "TOTAL WAR",
+"fg": [
+130,
+235,
+50
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+20,
+60,
+20
+],
+"span": [
+1986,
+1987
+]
+},
+"1988": {
+"t": "OFF",
+"fg": [
+20,
+20,
+20
+],
+"flip": false,
+"keep_alpha": true,
+"fill": 0.6
+},
+"1989": {
+"t": "ON",
+"fg": [
+20,
+20,
+20
+],
+"flip": false,
+"keep_alpha": true,
+"fill": 0.6
+},
+"1974": {
+"t": "BATS",
+"fg": [
+160,
+55,
+35
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+60,
+20,
+10
+],
+"span": [
+1974,
+1975,
+1976
+]
+},
+"1997": {
+"t": "CHEATS",
+"fg": [
+205,
+165,
+45
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+40,
+30,
+10
+],
+"span": [
+1997,
+1998
+]
+},
+"1999": {
+"t": "COLORS",
+"fg": [
+40,
+100,
+40
+],
+"flip": false,
+"cut": true,
+"font": "luckiest",
+"stroke": [
+20,
+30,
+20
+],
+"span": [
+1999,
+2000
+]
 }
 }
