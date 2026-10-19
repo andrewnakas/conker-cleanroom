@@ -34,7 +34,18 @@ def main(argv):
             p = os.path.join(site, n)
             shutil.rmtree(p) if os.path.isdir(p) else os.remove(p)
     os.makedirs(site, exist_ok=True)
-    shutil.copytree(os.path.join(ejs, "data"), os.path.join(site, "data"), dirs_exist_ok=True)
+    # libunrar (RARLab licence, not GPL-compatible) is never shipped: the site loads a .z64/.zip, not a RAR
+    shutil.copytree(os.path.join(ejs, "data"), os.path.join(site, "data"), dirs_exist_ok=True,
+                    ignore=shutil.ignore_patterns("libunrar.*"))
+    comp = os.path.join(site, "data", "compression")
+    for f in ("libunrar.js", "libunrar.wasm"):
+        if os.path.exists(os.path.join(comp, f)):
+            os.remove(os.path.join(comp, f))
+    if os.path.isdir(comp):
+        open(os.path.join(comp, "README.md"), "w", encoding="utf-8", newline="\n").write(
+            "# Compression Libraries\n\nThe EmulatorJS 4.2.3 zip and 7z extractors (`extractzip.js`, `extract7z.js`) are kept.\n"
+            "libunrar.js / libunrar.wasm (RARLab unrar licence, not GPL-compatible) were removed:\n"
+            "this site ships a .z64/.zip image and never loads a RAR archive.\n")
     shutil.copyfile(os.path.join(ejs, "LICENSE"), os.path.join(site, "data", "LICENSE.EmulatorJS"))
     shutil.copyfile(os.path.join(HERE, "index.html"), os.path.join(site, "index.html"))
     open(os.path.join(site, "conker.z64"), "wb").write(data)

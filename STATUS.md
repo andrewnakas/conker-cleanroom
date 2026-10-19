@@ -168,3 +168,13 @@
   Practice pack is built (dirty, never publish): `D:/n64work/conker/practice` = 34 call-and-response tracks,
   1795 phrases, `SCRIPT.txt`. Record each track and `python -m games.conker.voices cut <recording.wav> <track>`.
 - Decide whether shipping the game's own program code (see "Note on scope") is OK for this title.
+
+## 2026-10-19 originality audit, phase 0
+
+- Removed `games/conker/spec/voices.json` and `voices.partial.jsonl`: they held Whisper transcripts of the
+  retail dialogue (plus per-phrase timing). The placeholder TTS streams already in the build were spoken from
+  those transcripts, so their wording is retail wording; they stay for now and get replaced when the dialogue
+  is rewritten (Phase 1 `cleanroom.text.rewrite`). `games/conker/voices.py` cannot regenerate them until a
+  new, transcript-free line list exists. The files are still in git history (purge with the Phase 0 rewrite).
+- Added `games/conker/fonts/OFL-MPLUSRounded1c.txt`, TAINT.md (last saved scan), and `ports/ejs/make_site.py`
+  no longer ships libunrar.
